@@ -1,0 +1,43 @@
+--- script.rpy.orig	2026-10-23 13:18:16.203335503 +0000
++++ game_src/ctrl_think-0.1-win/game/script.rpy	2026-10-23 13:18:23.194231231 +0000
+@@ -373,6 +373,9 @@
+ 
+     call choose_character_label from _call_choose_character_label
+ 
++    # v257 (panel): open on a flash-forward of the worst case, then rewind.
++    call v257_cold_open from _call_v257_cold_open
++
+     show screen ambient_particles(count=16, tint="#cba6f7")
+ 
+     narrator "Sa panahon ngayon, halos lahat ng impormasyon ay isang click lang ang layo."
+@@ -662,6 +665,8 @@
+     prof "There's a difference."
+     narrator "The room becomes silent."
+     prof "Technology becomes dangerous when you stop thinking and start depending."
++    # v257 (panel): the reasons behind the rule, and what it cost someone.
++    call v257_ch1_reasons from _call_v257_ch1_reasons
+     hide prof
+ 
+     show expression Solid("#0a081280", xysize=(config.screen_width, config.screen_height)) as trio_dim
+--- v241_progress.rpy.orig	2026-10-23 13:18:16.205665044 +0000
++++ game/v241_progress.rpy	2026-10-23 13:18:25.542231371 +0000
+@@ -249,6 +249,8 @@
+ 
+ label fc_after_chapter(ch):
+     $ fc_sync()
++    # v257 (panel): the chapter's score and Prof. Santos's feedback first.
++    call v257_chapter_report(ch) from _call_v257_chapter_report
+     call screen flowchart(ch, True)
+     $ fc_new = set()
+     return
+--- options.rpy.orig	2026-10-23 13:18:16.207866353 +0000
++++ game/options.rpy	2026-10-23 13:18:27.150231467 +0000
+@@ -21,7 +21,7 @@
+ 
+ ## The version of the game.
+ 
+-define config.version = "1.0"
++define config.version = "1.1"
+ 
+ 
+ ## Text that is placed on the game's about screen. To insert a blank line
